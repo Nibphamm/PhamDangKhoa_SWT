@@ -1,16 +1,16 @@
 package com.khoapd;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountServiceTest {
-    private AccountService accountService;
+    private static AccountService accountService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         accountService = new AccountService();
     }
 
@@ -23,5 +23,4 @@ public class AccountServiceTest {
                 String.format("Test failed for username='%s', password='%s', email='%s'",
                         username, password, email));
     }
-
 }

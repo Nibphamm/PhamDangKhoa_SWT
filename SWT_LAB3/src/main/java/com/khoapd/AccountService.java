@@ -6,10 +6,12 @@ import java.util.regex.Pattern;
 
 public class AccountService {
     private Set<String> registeredUsernames;
+    private Set<String> registeredEmails;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
-    
+
     public AccountService() {
         this.registeredUsernames = new HashSet<>();
+        this.registeredEmails = new HashSet<>();
     }
 
     public boolean registerAccount(String username, String password, String email) {
@@ -22,7 +24,7 @@ public class AccountService {
         if (registeredUsernames.contains(username)) {
             return false;
         }
-        
+
         if (password == null || password.isEmpty()) {
             return false;
         }
@@ -41,30 +43,34 @@ public class AccountService {
         if (!hasSpecialCharacter(password)) {
             return false;
         }
-        
+
         if (email == null || email.trim().isEmpty()) {
             return false;
         }
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             return false;
         }
-        
+        if (registeredEmails.contains(email)) {
+            return false;
+        }
+
         registeredUsernames.add(username);
+        registeredEmails.add(email);
         return true;
     }
-    
+
     private boolean hasUpperCase(String password) {
         return password.chars().anyMatch(Character::isUpperCase);
     }
-    
+
     private boolean hasLowerCase(String password) {
         return password.chars().anyMatch(Character::isLowerCase);
     }
-    
+
     private boolean hasDigit(String password) {
         return password.chars().anyMatch(Character::isDigit);
     }
-    
+
     private boolean hasSpecialCharacter(String password) {
         return password.chars().anyMatch(ch -> "!@#$%^&*()_+-=[]{}|;:,.<>?".indexOf(ch) >= 0);
     }
@@ -82,5 +88,9 @@ public class AccountService {
             return false;
         }
         return EMAIL_PATTERN.matcher(email).matches();
+    }
+
+    public boolean isEmailRegistered(String email) {
+        return registeredEmails.contains(email);
     }
 }
