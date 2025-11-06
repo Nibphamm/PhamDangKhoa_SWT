@@ -1,0 +1,372 @@
+Name of your project,Exercise4_BasePage - Student Registration Form Automation
+Author,Automation Test Engineer
+
+Test Case ID,Test Case Description,Pre-conditions,Test Case Procedure,Test Data,Expected Results,Actual Result,Priority,Severity,Status
+Feature: Student Registration Form Functionality,,,,,,,,
+TC_FORM_001,"Verify user can submit form successfully with all required fields only","- User is on the Practice Form page (https://demoqa.com/automation-practice-form)
+- The website is accessible and not under maintenance
+- All required form fields are visible and active","1. Enter valid first name into the First Name field
+2. Enter valid last name into the Last Name field
+3. Select gender (Male/Female/Other)
+4. Enter valid 10-digit mobile number into the Mobile field
+5. Click the Submit button","First Name: John
+Last Name: Doe
+Gender: Male
+Mobile: 1234567890","- Success modal is displayed with title 'Thanks for submitting the form'
+- Student Name shows 'John Doe'
+- Mobile shows '1234567890'
+- Form submission is successful","Success modal displayed correctly. All submitted values matched expected results. Form was submitted successfully.",High,Critical,Pass
+
+TC_FORM_002,"Verify user can submit form successfully with all fields filled","- User is on the Practice Form page
+- The website is accessible
+- All form fields are visible and active","1. Enter valid first name
+2. Enter valid last name
+3. Enter valid email address
+4. Select gender
+5. Enter 10-digit mobile number
+6. Select date of birth from date picker
+7. Enter subjects (autocomplete)
+8. Select one or more hobbies
+9. Enter current address
+10. Select state from dropdown
+11. Select city from dropdown
+12. Click Submit button","First Name: Jane
+Last Name: Smith
+Email: jane.smith@test.com
+Gender: Female
+Mobile: 9876543210
+DOB: 25 March 1995
+Subjects: English
+Hobbies: Reading, Music
+Address: 456 Oak Avenue, City, State
+State: NCR
+City: Delhi","- Success modal is displayed
+- All field values are correctly shown in the modal
+- Student Name: Jane Smith
+- Email: jane.smith@test.com
+- Gender: Female
+- Mobile: 9876543210
+- Date of Birth: 25 March,1995
+- State and City: NCR Delhi","All fields submitted successfully. Modal displayed with correct data. All assertions passed.",High,Critical,Pass
+
+TC_FORM_003,"Verify fillForm helper method works correctly to fill entire form at once","- User is on the Practice Form page
+- PracticeFormPage object is initialized","1. Call fillForm() method with all 14 parameters
+2. Verify all fields are populated
+3. Click Submit button
+4. Verify modal displays correct information","First Name: Alex
+Last Name: Johnson
+Email: alex.j@mail.com
+Gender: Other
+Mobile: 5555555555
+DOB: 10 December 2000
+Subjects: Computer Science
+Hobbies: Sports
+Address: 789 Pine Road
+State: Haryana
+City: Karnal","- All form fields are filled correctly
+- Form submission is successful
+- Modal displays: Alex Johnson
+- Gender shows: Other
+- Helper method functions properly","Helper method successfully filled all fields. Form submitted correctly. Test passed.",Medium,Major,Pass
+
+TC_FORM_004_01,"Verify form submission with CSV inline data - Test Case 1","- User is on the Practice Form page
+- Test data is provided via @CsvSource annotation","1. Read test data from CSV inline source (row 1)
+2. Fill form using parameters from CSV
+3. Submit form
+4. Verify modal is displayed
+5. Verify submitted values match input","First Name: Mike
+Last Name: Wilson
+Email: mike.wilson@test.com
+Gender: Male
+Mobile: 1231231234
+DOB: 5 May 1992
+Subjects: Physics
+Hobbies: Sports
+Address: 111 First St
+State: NCR
+City: Delhi","- Modal is displayed
+- Student Name: Mike Wilson
+- Gender: Male
+- Mobile: 1231231234
+- Data-driven test executes successfully","CSV inline data read successfully. Form submitted with correct data. Test passed.",Medium,Major,Pass
+
+TC_FORM_004_02,"Verify form submission with CSV inline data - Test Case 2","- User is on the Practice Form page
+- Test data is provided via @CsvSource annotation","1. Read test data from CSV inline source (row 2)
+2. Fill form using parameters from CSV
+3. Submit form
+4. Verify modal is displayed
+5. Verify submitted values match input","First Name: Sarah
+Last Name: Connor
+Email: sarah.c@mail.com
+Gender: Female
+Mobile: 9879879876
+DOB: 20 August 1985
+Subjects: Chemistry
+Hobbies: Reading
+Address: 222 Second Ave
+State: Uttar Pradesh
+City: Agra","- Modal is displayed
+- Student Name: Sarah Connor
+- Gender: Female
+- Mobile: 9879879876","CSV inline data read successfully. Test passed.",Medium,Major,Pass
+
+TC_FORM_004_03,"Verify form submission with CSV inline data - Test Case 3","- User is on the Practice Form page
+- Test data is provided via @CsvSource annotation","1. Read test data from CSV inline source (row 3)
+2. Fill form using parameters from CSV
+3. Submit form
+4. Verify modal is displayed
+5. Verify submitted values match input","First Name: Pat
+Last Name: Taylor
+Email: pat.taylor@example.com
+Gender: Other
+Mobile: 5556667777
+DOB: 30 November 1998
+Subjects: Biology
+Hobbies: Music
+Address: 333 Third Blvd
+State: Haryana
+City: Panipat","- Modal is displayed
+- Student Name: Pat Taylor
+- Gender: Other
+- Mobile: 5556667777","CSV inline data read successfully. Test passed.",Medium,Major,Pass
+
+TC_FORM_005_01,"Verify form submission with CSV file data - John Doe","- User is on the Practice Form page
+- CSV file exists at src/test/resources/practice-form-data.csv
+- Test data is provided via @CsvFileSource annotation","1. Read test data from practice-form-data.csv (row 1)
+2. Fill all form fields using CSV data
+3. Submit form
+4. Verify modal is displayed
+5. Verify key fields match CSV input","First Name: John
+Last Name: Doe
+Email: john.doe@example.com
+Gender: Male
+Mobile: 1234567890
+DOB: 15 July 1990
+Subjects: Maths
+Hobbies: Sports
+Address: 123 Main Street
+State: NCR
+City: Delhi","- Modal is displayed
+- Student Name: John Doe
+- Email: john.doe@example.com
+- Gender: Male
+- Mobile: 1234567890
+- CSV file data read successfully","CSV file data loaded correctly. All validations passed. Test completed successfully.",High,Critical,Pass
+
+TC_FORM_005_02,"Verify form submission with CSV file data - Jane Smith","- User is on the Practice Form page
+- CSV file exists and is readable","1. Read test data from practice-form-data.csv (row 2)
+2. Fill form with Jane Smith data
+3. Submit form
+4. Verify submission success","First Name: Jane
+Last Name: Smith
+Email: jane.smith@test.com
+Gender: Female
+Mobile: 9876543210
+DOB: 25 March 1995
+Subjects: English
+Hobbies: Reading
+Address: 456 Oak Avenue
+State: Uttar Pradesh
+City: Agra","- Modal displayed
+- All data matches CSV input
+- Student Name: Jane Smith
+- State and City: Uttar Pradesh Agra","CSV data processed successfully. Test passed.",High,Critical,Pass
+
+TC_FORM_005_03,"Verify form submission with CSV file data - Alex Johnson","- User is on the Practice Form page
+- CSV file exists and is readable","1. Read test data from practice-form-data.csv (row 3)
+2. Fill form with Alex Johnson data
+3. Submit form
+4. Verify submission success","First Name: Alex
+Last Name: Johnson
+Email: alex.j@mail.com
+Gender: Other
+Mobile: 5555555555
+DOB: 10 December 2000
+Subjects: Computer Science
+Hobbies: Music
+Address: 789 Pine Road
+State: Haryana
+City: Karnal","- Modal displayed
+- Student Name: Alex Johnson
+- Gender: Other
+- CSV file successfully parsed","Test passed with CSV file data.",High,Critical,Pass
+
+TC_FORM_005_04,"Verify form submission with CSV file data - Maria Garcia","- User is on the Practice Form page
+- CSV file exists and is readable","1. Read test data from practice-form-data.csv (row 4)
+2. Fill form with Maria Garcia data
+3. Submit form
+4. Verify submission success","First Name: Maria
+Last Name: Garcia
+Email: maria.garcia@email.com
+Gender: Female
+Mobile: 1112223333
+DOB: 5 January 1988
+Subjects: Physics
+Hobbies: Sports, Reading (multiple)
+Address: 321 Elm Street
+State: Rajasthan
+City: Jaipur","- Modal displayed
+- Multiple hobbies handled correctly
+- State and City: Rajasthan Jaipur","Multiple hobbies from CSV processed correctly. Test passed.",High,Critical,Pass
+
+TC_FORM_006_01,"Verify Male gender option selection","- User is on the Practice Form page
+- Gender radio buttons are visible","1. Fill required fields (First Name, Last Name, Mobile)
+2. Select 'Male' gender radio button
+3. Submit form
+4. Verify gender is displayed as 'Male' in modal","First Name: Test
+Last Name: User
+Gender: Male
+Mobile: 1234567890","- Modal is displayed
+- Gender field shows 'Male'
+- Radio button selection works correctly","Male gender selected and submitted successfully. Test passed.",Medium,Major,Pass
+
+TC_FORM_006_02,"Verify Female gender option selection","- User is on the Practice Form page
+- Gender radio buttons are visible","1. Fill required fields (First Name, Last Name, Mobile)
+2. Select 'Female' gender radio button
+3. Submit form
+4. Verify gender is displayed as 'Female' in modal","First Name: Test
+Last Name: User
+Gender: Female
+Mobile: 1234567890","- Modal is displayed
+- Gender field shows 'Female'
+- Radio button selection works correctly","Female gender selected and submitted successfully. Test passed.",Medium,Major,Pass
+
+TC_FORM_006_03,"Verify Other gender option selection","- User is on the Practice Form page
+- Gender radio buttons are visible","1. Fill required fields (First Name, Last Name, Mobile)
+2. Select 'Other' gender radio button
+3. Submit form
+4. Verify gender is displayed as 'Other' in modal","First Name: Test
+Last Name: User
+Gender: Other
+Mobile: 1234567890","- Modal is displayed
+- Gender field shows 'Other'
+- All three gender options function correctly","Other gender selected and submitted successfully. Test passed.",Medium,Major,Pass
+
+TC_FORM_007,"Verify multiple hobbies can be selected simultaneously","- User is on the Practice Form page
+- Hobby checkboxes are visible and clickable","1. Fill required fields
+2. Select Sports checkbox
+3. Select Reading checkbox
+4. Select Music checkbox
+5. Submit form
+6. Verify all three hobbies appear in modal","First Name: Hobby
+Last Name: Tester
+Gender: Male
+Mobile: 9999999999
+Hobbies: Sports, Reading, Music","- Modal is displayed
+- Hobbies field contains 'Sports'
+- Hobbies field contains 'Reading'
+- Hobbies field contains 'Music'
+- Multiple checkbox selection works correctly","All three hobbies selected successfully. Modal displayed all selected hobbies. Test passed.",Medium,Major,Pass
+
+TC_FORM_008,"Verify multiple subjects can be added via autocomplete","- User is on the Practice Form page
+- Subjects autocomplete field is functional","1. Fill required fields
+2. Type 'Maths' in subjects field and press Enter
+3. Type 'Physics' in subjects field and press Enter
+4. Type 'Chemistry' in subjects field and press Enter
+5. Submit form
+6. Verify all subjects appear in modal","First Name: Subject
+Last Name: Tester
+Gender: Female
+Mobile: 8888888888
+Subjects: Maths, Physics, Chemistry","- Modal is displayed
+- Subjects field contains 'Maths'
+- Subjects field contains 'Physics'
+- Subjects field contains 'Chemistry'
+- Autocomplete with multiple entries works","All subjects added successfully. Autocomplete handled multiple values correctly. Test passed.",Medium,Major,Pass
+
+TC_FORM_009_01,"Verify date picker with date: 1 January 2000","- User is on the Practice Form page
+- Date picker is functional","1. Fill required fields
+2. Click date of birth field
+3. Select year: 2000
+4. Select month: January
+5. Select day: 1
+6. Submit form
+7. Verify date format in modal","First Name: Date
+Last Name: Test
+Gender: Male
+Mobile: 7777777777
+DOB: 1 January 2000","- Modal is displayed
+- Date of Birth shows: 01 January,2000
+- Date picker functions correctly
+- Leading zero is added for single digit day","Date selected correctly. Format validated with leading zero. Test passed.",High,Major,Pass
+
+TC_FORM_009_02,"Verify date picker with date: 15 June 1995","- User is on the Practice Form page
+- Date picker is functional","1. Fill required fields
+2. Select date: 15 June 1995 via date picker
+3. Submit form
+4. Verify date in modal","First Name: Date
+Last Name: Test
+Gender: Male
+Mobile: 7777777777
+DOB: 15 June 1995","- Modal is displayed
+- Date of Birth shows: 15 June,1995
+- Mid-month date handled correctly","Date picker handled two-digit day correctly. Test passed.",High,Major,Pass
+
+TC_FORM_009_03,"Verify date picker with date: 31 December 1990","- User is on the Practice Form page
+- Date picker is functional","1. Fill required fields
+2. Select date: 31 December 1990 via date picker
+3. Submit form
+4. Verify date in modal","First Name: Date
+Last Name: Test
+Gender: Male
+Mobile: 7777777777
+DOB: 31 December 1990","- Modal is displayed
+- Date of Birth shows: 31 December,1990
+- End of month/year date handled correctly","Last day of month and year selected successfully. Test passed.",High,Major,Pass
+
+TC_FORM_010_01,"Verify State-City combination: NCR - Delhi","- User is on the Practice Form page
+- State and City dropdowns are functional
+- City dropdown depends on State selection","1. Fill required fields
+2. Click State dropdown
+3. Select 'NCR'
+4. Wait for City dropdown to populate
+5. Select 'Delhi'
+6. Submit form
+7. Verify State and City in modal","First Name: Location
+Last Name: Test
+Gender: Female
+Mobile: 6666666666
+State: NCR
+City: Delhi","- Modal is displayed
+- State and City shows: NCR Delhi
+- Dependent dropdown works correctly","State and City selected successfully. Dependent dropdown functioned properly. Test passed.",High,Major,Pass
+
+TC_FORM_010_02,"Verify State-City combination: Uttar Pradesh - Agra","- User is on the Practice Form page
+- Dropdowns are functional","1. Fill required fields
+2. Select State: Uttar Pradesh
+3. Select City: Agra
+4. Submit form
+5. Verify in modal","First Name: Location
+Last Name: Test
+Gender: Female
+Mobile: 6666666666
+State: Uttar Pradesh
+City: Agra","- Modal is displayed
+- State and City shows: Uttar Pradesh Agra","State-City combination validated. Test passed.",High,Major,Pass
+
+TC_FORM_010_03,"Verify State-City combination: Haryana - Karnal","- User is on the Practice Form page
+- Dropdowns are functional","1. Fill required fields
+2. Select State: Haryana
+3. Select City: Karnal
+4. Submit form
+5. Verify in modal","First Name: Location
+Last Name: Test
+Gender: Female
+Mobile: 6666666666
+State: Haryana
+City: Karnal","- Modal is displayed
+- State and City shows: Haryana Karnal","State-City combination validated. Test passed.",High,Major,Pass
+
+TC_FORM_010_04,"Verify State-City combination: Rajasthan - Jaipur","- User is on the Practice Form page
+- Dropdowns are functional","1. Fill required fields
+2. Select State: Rajasthan
+3. Select City: Jaipur
+4. Submit form
+5. Verify in modal","First Name: Location
+Last Name: Test
+Gender: Female
+Mobile: 6666666666
+State: Rajasthan
+City: Jaipur","- Modal is displayed
+- State and City shows: Rajasthan Jaipur
+- All four location combinations tested successfully","All State-City combinations validated successfully. Test passed.",High,Major,Pass
